@@ -6,13 +6,81 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Movies</title>
 
-    <link rel="stylesheet" href="./styles/app.css">
-    <script defer src="./src/secrets.js" type="module"></script>
-    <script defer src="./src/main.js" type="module"></script>
+    <link rel="stylesheet" href="./styles/index.css">
+    <script defer src="./src/secrets.mjs" type="module"></script>
+    <script defer src="./src/nodes.js" type="module"></script>
+    <script defer src="./src/index.mjs" type="module"></script>
+    <script defer src="./src/navigation.mjs" type="module"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </head>
-<body>
-    <h1>
-        Movies
-    </h1>
+<body id="body">
+    <header>
+        <section class="headerSectionLogo">
+            <img alt="logo" src="./media/movieIcon.png" class="logo">
+        </section>
+        <section class="headerSectionMenu">
+            <div class="headerDropdownDiv">
+                <button class="divDropdownButton">Genres</button>
+                <div class="dropdownContent">
+                    <a href="#">Movies</a>
+                    <a href="#">TV Shows</a>
+                </div>
+            </div>
+            <div>
+                <input type="search" placeholder="Search a movie" class="headerSearchBar">
+                <button type="button" class="headerSearchButton">Search</button>
+            </div>
+        </section>
+    </header>
+
+    <main id="bodyMain">
+        <section class="sectionLandingMessage">
+            <div>
+                <h1>Welcome</h1>
+                <p>Find all movies and TV shows details here</p>
+            </div>
+        </section>
+
+        <section class="sectionButtonOptions">
+            <button type="button" class="buttonGenreOptions" id="moviesMediaOption">Movies</button>
+            <button type="button" class="buttonGenreOptions" id="showsMediaOption">TV Shows</button>
+        </section>
+
+        <section>
+            <h1>
+                Trending
+            </h1>
+            <div id="divTrending" class="divContainers">
+                
+            </div>
+        </section>
+    
+        <section>
+            <h1>
+                Now playing
+            </h1>
+            <div id="divNowPlaying" class="divContainers">
+                
+            </div>
+        </section>
+    
+        <section>
+            <h1>
+                Upcoming
+            </h1>
+            <div id="divUpcoming" class="divContainers">
+                
+            </div>
+        </section>
+    
+        <section>
+            <h1>
+                Top rated
+            </h1>
+            <div id="divTopRated" class="divContainers">
+                
+            </div>
+        </section>
+    </main>
 </body>
 </html>
