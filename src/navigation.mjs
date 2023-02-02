@@ -1,36 +1,27 @@
-import {run} from './index.mjs'
+import {runHomePage} from './index.mjs';
+import {runMediaDetailsPage} from './mediaDetails.mjs';
 
 
 function navigator(){
-    console.log({location});
-
-    location.hash.startsWith('#trends') ? trendsPage() :
-    location.hash.startsWith('#search=') ? searchPage() :
-    location.hash.startsWith('#movie=') ? movieDetailsPage() :
+    location.hash.startsWith('#movie=') ? mediaDetailsPage() :
+    location.hash.startsWith('#tv=') ? mediaDetailsPage() :
     location.hash.startsWith('#category=') ? categoriesPage() :
     homePage();
 }
 
-function trendsPage(){
-    console.log('Trends')
-}
+function mediaDetailsPage(){
+    const [_, id] = location.hash.split('=');
 
-function searchPage(){
-    console.log('Search')
-}
-
-function movieDetailsPage(){
-    console.log('Movie')
+    runMediaDetailsPage(id);
 }
 
 function categoriesPage(){
-    console.log('Categories')
+    console.log('Categories');
 }
 
 function homePage(){
-    console.log('Home page');
-
-    run()
+    // console.log('Home page');
+    runHomePage();
 }
 
 window.addEventListener('DOMContentLoaded', navigator, false);

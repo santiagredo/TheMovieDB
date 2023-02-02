@@ -1,4 +1,5 @@
 import {API_KEY} from "./secrets.mjs";
+
 const api = axios.create({
     baseURL: 'https://api.themoviedb.org/3/',
     headers: {
@@ -9,107 +10,144 @@ const api = axios.create({
     }
 });
 
-const moviesMediaOption = document.getElementById('moviesMediaOption');
-moviesMediaOption.disabled = true;
-moviesMediaOption.addEventListener('click', mediaOptions);
+const bodySectionContainer = document.getElementById('bodySectionContainer');
+const bodyMain = document.getElementById('bodyMain');
 
-const showsMediaOption = document.getElementById('showsMediaOption');
-showsMediaOption.addEventListener('click', mediaOptions);
+const queryMediaObject = {
+    tv: {
+        'Trending TV shows': '/trending/tv/week',
+        'TV shows now playing': '/tv/on_the_air',
+        'Upcoming TV shows': '/tv/airing_today',
+        'Top rated TV shows': '/tv/top_rated'
+    },
+    movies: {
+        'Trending Movies': '/trending/movie/week',
+        'Movies now playing': '/movie/now_playing',
+        'Upcoming movies': '/movie/upcoming',
+        'Top rated movies': 'movie/top_rated'
+    },
+    currentMediaType: '#movie'
+}
 
 
-function mediaOptions(){
+function mediaOptions(moviesMediaOption, showsMediaOption){
     if(moviesMediaOption.disabled == true){
         moviesMediaOption.disabled = false;
         showsMediaOption.disabled = true;
-        getTrending('tv');
-        getNowPlaying('/tv/on_the_air');
-        getUpcoming('/tv/airing_today');
-        getTopRated('tv')  
+        getMedia(queryMediaObject.tv);
+        queryMediaObject.currentMediaType = '#tv';
     }else{
         moviesMediaOption.disabled = true;
-        showsMediaOption.disabled = false;
-        getTrending('movie');
-        getNowPlaying('/movie/now_playing');
-        getUpcoming('/movie/upcoming');
-        getTopRated('movie')   
+        showsMediaOption.disabled = false; 
+        getMedia(queryMediaObject.movies);
+        queryMediaObject.currentMediaType = '#movie';
     }
 }
 
-async function getTrending(media){
-    const divTrending = document.getElementById('divTrending');
-    divTrending.innerHTML = '';
+async function getMedia(media){
+    bodyMain.innerHTML = '';
 
-    const {data} = await api(`trending/${media}/week`);
-    console.log(data)
-    const results = data.results;
+    Object.entries(media).map(async ([query, urlQuery]) => {
+        const {data} = await api(urlQuery);
+        const results = await data.results;
 
-    results.map((ele) => {
-        imageContainerCreator(ele, divTrending)
-    })
-};
-
-async function getNowPlaying(media){
-    const divNowPlaying = document.getElementById('divNowPlaying'); 
-    divNowPlaying.innerHTML = '';
-
-    const {data} = await api(media);
-
-    const results = data.results;
-
-    results.map((ele) => {
-        imageContainerCreator(ele, divNowPlaying)
+        
+        homePageContainerCreator(query, results);
     })
 }
 
-async function getUpcoming(media){
-    const divUpcoming = document.getElementById('divUpcoming');
-    divUpcoming.innerHTML = '';
 
-    const {data} = await api(media);
+function homePageWelcomeMessageGenerator(){
+    bodySectionContainer.innerHTML = '';
+    const sectionLandingMessage = document.createElement('section');
+    sectionLandingMessage.classList.add('sectionLandingMessage');
+    const div = document.createElement('div');
 
-    const results = data.results;
+    const title = document.createElement('h1');
+    title.innerHTML = 'Welcome';
+    const subtitle = document.createElement('p');
+    subtitle.innerHTML = 'Find all movies and TV shows details here';
 
-    results.map((ele) => {
-        imageContainerCreator(ele, divUpcoming)
-    })   
+    div.appendChild(title);
+    div.appendChild(subtitle);
+    sectionLandingMessage.appendChild(div);
+    bodySectionContainer.appendChild(sectionLandingMessage);
 }
 
-async function getTopRated(media){
-    const divTopRated = document.getElementById('divTopRated');
-    divTopRated.innerHTML = '';
+function homePageButtonsMediaOption(){
+    const sectionButtonOptions = document.createElement('section');
+    sectionButtonOptions.classList.add('sectionButtonOptions');
 
-    const {data} = await api(`/${media}/top_rated`);
+    const moviesMediaOption = document.createElement('button');
+    moviesMediaOption.classList.add('buttonGenreOptions');
+    moviesMediaOption.innerHTML = 'Movies';
+    moviesMediaOption.id = 'moviesMediaOption';
+    moviesMediaOption.disabled = true;
 
-    const results = data.results;
+    const showsMediaOption = document.createElement('button');
+    showsMediaOption.classList.add('buttonGenreOptions');
+    showsMediaOption.innerHTML = 'TV shows';
+    showsMediaOption.id = 'showsMediaOption';
 
-    results.map((ele) => {
-        imageContainerCreator(ele, divTopRated)
-    })  
+
+    moviesMediaOption.addEventListener('click', () => {
+        mediaOptions(moviesMediaOption, showsMediaOption)
+    });
+
+    showsMediaOption.addEventListener('click', () => {
+        mediaOptions(moviesMediaOption, showsMediaOption)
+    });
+
+    sectionButtonOptions.appendChild(moviesMediaOption);
+    sectionButtonOptions.appendChild(showsMediaOption);
+
+    bodySectionContainer.appendChild(sectionButtonOptions);
 }
 
 
-function imageContainerCreator(ele, parent){
+export function homePageContainerCreator(query, data){    
+    const section = document.createElement('section');
+
+    const title = document.createElement('h1');
+    title.innerHTML = query;
+    section.appendChild(title);
+    bodyMain.appendChild(section);
+
+    const imageContainer = document.createElement('div');
+    imageContainer.classList.add('divContainers');
+
+    data.map((ele) => {
+        imageContainerCreator(ele, imageContainer)
+    })
+
+    bodyMain.appendChild(imageContainer)
+}
+
+export function imageContainerCreator(ele, parent){
     const imagesPosterURL = 'https://image.tmdb.org/t/p/w300';
 
     const movieContainer = document.createElement('div');
     movieContainer.classList.add('movieContainer');
     
     const movieImage = document.createElement('img');
-    movieImage.setAttribute('alt', ele.title);
-    movieImage.setAttribute('src', `${imagesPosterURL}${ele.poster_path}`);
+    movieImage.alt = ele.title;
+    movieImage.src = `${imagesPosterURL}${ele.poster_path}`;
     movieImage.addEventListener('click', () => {
-        alert(`${ele.title || ele.name} clicked`);
-        location.hash = `#movie=${ele.id}`
+        hashLocation(ele.id);
     })
 
     movieContainer.appendChild(movieImage);
     parent.appendChild(movieContainer);
 }
 
+function hashLocation(id){
+    location.hash = `${queryMediaObject.currentMediaType}=${id}`;
+}
 
-export function run(){
-    getTrending('movie')
-    getNowPlaying('/movie/now_playing')
-    getUpcoming('/movie/upcoming')
-    getTopRated('movie')
-};
+
+export function runHomePage(){
+    homePageWelcomeMessageGenerator();
+    homePageButtonsMediaOption();
+    getMedia(queryMediaObject.movies);
+    queryMediaObject.currentMediaType = '#movie';
+}

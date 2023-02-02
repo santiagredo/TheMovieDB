@@ -13,7 +13,6 @@ body{
     height: 100vh;
     background-color: #080f28;
     padding: 1%;
-    padding-right: 1%;
 }
 
 header{
@@ -22,7 +21,6 @@ header{
     justify-content: space-around;
     background-color: #14235b;
     border-radius: 15px;
-    max-width: 95%;
     margin: 2rem;
 }
 
@@ -97,19 +95,20 @@ header{
     border-radius: 15px;
 }
 
-.headerSearchButton{
+.headerSearchButton, .returnButton{
     margin-left: 1rem;
     height: 5rem;
     width: 8rem;
     border-radius: 15px;
+    background-color: white;
 }
 
-.headerSearchButton:hover{
+.headerSearchButton:hover, .returnButton:hover{
     cursor: pointer;
     background-color: rgb(0, 133, 190);
 }
 
-.headerSearchButton:active{
+.headerSearchButton:active, .returnButton:active{
     background-color: rgb(80, 203, 255);
 }
 
@@ -184,5 +183,57 @@ img:hover{
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+}
+
+
+
+
+
+.returnButton{
+    margin-left: 2rem;
+    font-size: 2rem;
+}
+
+
+.mediaDetailsContainer{
+    margin: 2rem;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.mediaDetailsContainer ul{
+    display: flex;
+    justify-content: space-evenly;
+    font-size: 2rem;
+    color: white;
+    text-shadow: 0 0 1px black, 0 0 1px black, 0 0 1px black, 0 0 1px black;
+    padding-left: 25rem;
+    padding-right: 25rem;
+}
+
+.mediaDetailsContainer h1{
+    font-size: 5rem;
+    margin-left: 2rem;
+    margin-right: 2rem;
+    text-shadow: 0 0 1px black, 0 0 1px black, 0 0 1px black, 0 0 1px black;
+}
+
+.mediaDetailsContainer p{
+    text-shadow: 0 0 1px black, 0 0 1px black, 0 0 1px black, 0 0 1px black;
+}
+
+.mediaDetailsContainer h2{
+    font-size: 2rem;
+    color: white;
+    text-shadow: 0 0 1px black, 0 0 1px black, 0 0 1px black, 0 0 1px black;
+}
+
+.mediaDetailsContainer img{
+    border: none;
+    border-radius: 0;
+    width: 40rem;
+    height: 50rem;
+    box-shadow: 5px 5px 15px black;
 }
 
