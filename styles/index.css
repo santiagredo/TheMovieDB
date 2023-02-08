@@ -28,13 +28,19 @@ header{
     width: 40%;
     display: flex;
     justify-content: start;
+    margin-right: 25rem;
 }
 
 .headerSectionMenu{
+    /* background-color: yellow; */
     width: 40%;
     display: flex;
     justify-content: space-around;
     align-items: center;
+}
+
+.headerSectionLogo a{
+    color: white;
 }
 
 .logo{
@@ -44,8 +50,32 @@ header{
 }
 
 .logo:hover{
-    cursor: pointer;
+    cursor: auto;
 }
+
+.homeButton[href]{
+    background-color: white;
+    color: black;
+    text-decoration: none;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+    border-radius: 15px;
+    height: 5rem;
+    margin-top: 1%;
+}
+
+.homeButton:hover{
+    cursor: pointer;
+    background-color: rgb(0, 133, 190);
+}
+
+.homeButton:active{
+    background-color: rgb(80, 203, 255);
+}
+
+
+
 
 .divDropdownButton{
     background-color: white;
@@ -54,6 +84,7 @@ header{
     font-size: 16px;
     border: none;
     border-radius: 15px;
+    margin-left: 15rem;
 }
 
 .dropdownContent{
@@ -64,6 +95,7 @@ header{
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1;
     border-radius: 15px;
+    margin-left: 7.5rem;
 }
 
 .dropdownContent a{
@@ -73,6 +105,10 @@ header{
     display: block;
     background-color: white;
     border-radius: 15px;
+}
+
+.headerDropdownDiv{
+    width: 1rem;
 }
 
 .headerDropdownDiv:hover .dropdownContent{
@@ -87,28 +123,99 @@ header{
     background-color: rgb(80, 203, 255);
 }
 
+.dropdownMoviesContent{
+    display: none;
+    position: absolute;
+    background-color: white;
+    min-width: 160px;
+    margin: auto;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    border-radius: 15px;
+    top: -0.1rem;
+    left: -16rem;
+    text-indent: 10px;
+}
+
+.dropdownMoviesContent li{
+    padding: 3px;
+}
+
+.dropdownMoviesContent li:hover{
+    background-color: rgb(0, 133, 190);
+    border-radius: 15px;
+    cursor: pointer;
+}
+
+.dropdownMoviesContent li:active{
+    background-color: rgb(80, 203, 255);
+}
+
+.dropdownContent a:hover .dropdownMoviesContent{
+    display: inline-block;
+}
+
+.dropdownShowsContent{
+    display: none;
+    position: absolute;
+    background-color: white;
+    min-width: 160px;
+    margin: auto;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    border-radius: 15px;
+    top: 4.6rem;
+    left: -18rem;
+    text-indent: 10px;
+}
+
+.dropdownShowsContent li{
+    padding: 3px;
+}
+
+.dropdownShowsContent li:hover{
+    background-color: rgb(0, 133, 190);
+    border-radius: 15px;
+    cursor: pointer;
+}
+
+.dropdownShowsContent li:active{
+    background-color: rgb(80, 203, 255);
+}
+
+.dropdownContent a:hover .dropdownShowsContent{
+    display: inline-block;
+}
+
+.searchContainer{
+    /* background-color: aqua; */
+    margin-left: 22rem;
+}
+
 .headerSearchBar{
     height: 5rem;
+    width: 23rem;
     padding-left: 1rem;
     padding-right: 1rem;
     text-align: left;
     border-radius: 15px;
+    border: none;
 }
 
-.headerSearchButton, .returnButton{
-    margin-left: 1rem;
+.headerSearchButton, .returnButton, .paginationButton{
     height: 5rem;
     width: 8rem;
     border-radius: 15px;
     background-color: white;
+    border: none;
 }
 
-.headerSearchButton:hover, .returnButton:hover{
+.headerSearchButton:hover, .returnButton:hover, .paginationButton:hover{
     cursor: pointer;
     background-color: rgb(0, 133, 190);
 }
 
-.headerSearchButton:active, .returnButton:active{
+.headerSearchButton:active, .returnButton:active, .paginationButton:active{
     background-color: rgb(80, 203, 255);
 }
 
@@ -122,6 +229,7 @@ h1{
     text-align: center;
     font-size: 10rem;
     color: white;
+    max-width: 95%;
 }
 
 p{
@@ -172,6 +280,8 @@ img{
     width: 12rem;
     height: 200px;
     display: flex;
+    color: white;
+    font-size: 150%;
 }
 
 img:hover{
@@ -237,3 +347,26 @@ img:hover{
     box-shadow: 5px 5px 15px black;
 }
 
+
+.paginationContainer{
+    margin: 2rem;
+    padding-bottom: 2rem;
+    padding-right: 4rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.paginationContainer h2{
+    font-size: 2rem;
+    color: white;
+    text-shadow: 0 0 1px black, 0 0 1px black, 0 0 1px black, 0 0 1px black;
+}
+
+.paginationContainer button{
+    margin-left: 3rem;
+    margin-right: 3rem;
+    background: white;
+    border-radius: 50%;
+    width: 50px;
+}

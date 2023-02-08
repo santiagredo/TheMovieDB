@@ -13,7 +13,7 @@ const api = axios.create({
 const bodySectionContainer = document.getElementById('bodySectionContainer');
 const bodyMain = document.getElementById('bodyMain');
 
-const queryMediaObject = {
+export const queryMediaObject = {
     tv: {
         'Trending TV shows': '/trending/tv/week',
         'TV shows now playing': '/tv/on_the_air',
@@ -36,11 +36,13 @@ function mediaOptions(moviesMediaOption, showsMediaOption){
         showsMediaOption.disabled = true;
         getMedia(queryMediaObject.tv);
         queryMediaObject.currentMediaType = '#tv';
+        console.log(queryMediaObject.currentMediaType)
     }else{
         moviesMediaOption.disabled = true;
         showsMediaOption.disabled = false; 
         getMedia(queryMediaObject.movies);
         queryMediaObject.currentMediaType = '#movie';
+        console.log(queryMediaObject.currentMediaType)
     }
 }
 
@@ -105,7 +107,7 @@ function homePageButtonsMediaOption(){
 }
 
 
-export function homePageContainerCreator(query, data){    
+export function homePageContainerCreator(query, data){  
     const section = document.createElement('section');
 
     const title = document.createElement('h1');
@@ -125,14 +127,17 @@ export function homePageContainerCreator(query, data){
 
 export function imageContainerCreator(ele, parent){
     const imagesPosterURL = 'https://image.tmdb.org/t/p/w300';
+    // console.log(ele)
 
     const movieContainer = document.createElement('div');
     movieContainer.classList.add('movieContainer');
     
     const movieImage = document.createElement('img');
-    movieImage.alt = ele.title;
+    movieImage.alt = ele.title ? ele.title : ele.name;
     movieImage.src = `${imagesPosterURL}${ele.poster_path}`;
     movieImage.addEventListener('click', () => {
+        queryMediaObject.currentMediaType = ele.media_type ? `#${ele.media_type}` : queryMediaObject.currentMediaType;
+        console.log(queryMediaObject.currentMediaType);
         hashLocation(ele.id);
     })
 

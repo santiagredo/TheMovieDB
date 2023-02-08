@@ -11,24 +11,27 @@
     <script defer src="./src/mediaDetails.mjs" type="module"></script>
     <script defer src="./src/index.mjs" type="module"></script>
     <script defer src="./src/navigation.mjs" type="module"></script>
+    <script defer src="./src/genres.mjs" type="module"></script>
+    <script defer src="./src/search.mjs" type="module"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </head>
 <body id="body">
     <header>
         <section class="headerSectionLogo">
             <img alt="logo" src="./media/movieIcon.png" class="logo">
+            <a class="homeButton" href="#">Home</a>
         </section>
         <section class="headerSectionMenu">
             <div class="headerDropdownDiv">
                 <button class="divDropdownButton">Genres</button>
                 <div class="dropdownContent">
-                    <a href="#">Movies</a>
-                    <a href="#">TV Shows</a>
+                    <a id="dropdownMoviesGenres">Movies</a>
+                    <a id="dropdownShowsGenres">TV Shows</a>
                 </div>
             </div>
-            <div>
-                <input type="search" placeholder="Search a movie" class="headerSearchBar">
-                <button type="button" class="headerSearchButton">Search</button>
+            <div class="searchContainer">
+                <input type="search" placeholder="Search a movie" class="headerSearchBar" id="searchBar">
+                <button type="button" class="headerSearchButton" id="searchButton">Search</button>
             </div>
         </section>
     </header>
@@ -37,57 +40,7 @@
     </section>
 
     <main id="bodyMain">
-        <!-- <div>
-            <section class="sectionLandingMessage">
-                <div>
-                    <h1>Welcome</h1>
-                    <p>Find all movies and TV shows details here</p>
-                </div>
-            </section>
-    
-            <section class="sectionButtonOptions">
-                <button type="button" class="buttonGenreOptions" id="moviesMediaOption">Movies</button>
-                <button type="button" class="buttonGenreOptions" id="showsMediaOption">TV Shows</button>
-            </section>
-        </div>
 
-        <div id="homePageMediaContainerDiv"> -->
-            <!-- <section>
-                <h1>
-                    Trending
-                </h1>
-                <div id="divTrending" class="divContainers">
-                    
-                </div>
-            </section>
-        
-            <section>
-                <h1>
-                    Now playing
-                </h1>
-                <div id="divNowPlaying" class="divContainers">
-                    
-                </div>
-            </section>
-        
-            <section>
-                <h1>
-                    Upcoming
-                </h1>
-                <div id="divUpcoming" class="divContainers">
-                    
-                </div>
-            </section>
-        
-            <section>
-                <h1>
-                    Top rated
-                </h1>
-                <div id="divTopRated" class="divContainers">
-                    
-                </div>
-            </section> -->
-        <!-- </div> -->
     </main>
 </body>
 </html>

@@ -32,7 +32,7 @@ function hashLocation(){
     return location.hash.includes('movie') ? 'movie' : 'tv';
 }
 
-function clearHomePage(){
+export function clearHomePage(){
     bodySectionContainer.innerHTML = '';
     bodySectionContainer.classList = '';
 
@@ -42,7 +42,7 @@ function clearHomePage(){
 
 
 
-function returnButtonGenerator(){
+export function returnButtonGenerator(){
     const div = document.createElement('div');
 
     const button = document.createElement('button');
