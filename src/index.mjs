@@ -49,13 +49,31 @@ function mediaOptions(moviesMediaOption, showsMediaOption){
 async function getMedia(media){
     bodyMain.innerHTML = '';
 
-    Object.entries(media).map(async ([query, urlQuery]) => {
-        const {data} = await api(urlQuery);
-        const results = await data.results;
+    const mediaQueries = Object.entries(JSON.parse(JSON.stringify(media)));
 
-        
-        homePageContainerCreator(query, results);
-    })
+    const mediaOrder = Object.keys(JSON.parse(JSON.stringify(media)));
+
+    mediaQueries.map(async (ele) => {
+        ele.push(await getMediaResults(ele[1]))        
+    });
+
+    setTimeout(() => {
+        mediaQueries.sort((a, b) => {
+            return mediaOrder.indexOf(a) - mediaOrder.indexOf(b);
+        });
+    
+        mediaQueries.map((ele) => {
+            homePageContainerCreator(ele[0], ele[2])
+        });
+    }, 500);
+    
+}
+
+async function getMediaResults(url){
+    const {data} = await api(url);
+    const results = await data.results;
+
+    return results;
 }
 
 
@@ -120,9 +138,9 @@ export function homePageContainerCreator(query, data){
 
     data.map((ele) => {
         imageContainerCreator(ele, imageContainer)
-    })
+    });
 
-    bodyMain.appendChild(imageContainer)
+    bodyMain.appendChild(imageContainer);
 }
 
 export function imageContainerCreator(ele, parent){

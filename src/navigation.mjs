@@ -30,7 +30,6 @@ function searchPage(){
 }
 
 function homePage(){
-    // console.log('Home page');
     runHomePage();
 }
 
