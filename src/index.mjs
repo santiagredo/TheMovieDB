@@ -49,31 +49,34 @@ function mediaOptions(moviesMediaOption, showsMediaOption){
 async function getMedia(media){
     bodyMain.innerHTML = '';
 
-    const mediaQueries = Object.entries(JSON.parse(JSON.stringify(media)));
-
-    const mediaOrder = Object.keys(JSON.parse(JSON.stringify(media)));
-
-    mediaQueries.map(async (ele) => {
-        ele.push(await getMediaResults(ele[1]))        
+    const mediaOrder = Object.keys(media);
+    const mediaQueries = Object.entries(media);
+    
+    const promises = mediaQueries.map(async ([query, urlQuery]) => {
+        const {data} = await api(urlQuery);
+        const results = await data.results;
+        return {query, results};
     });
-
-    setTimeout(() => {
-        mediaQueries.sort((a, b) => {
-            return mediaOrder.indexOf(a) - mediaOrder.indexOf(b);
-        });
     
-        mediaQueries.map((ele) => {
-            homePageContainerCreator(ele[0], ele[2])
-        });
-    }, 500);
+    const dataArray = await Promise.all(promises);
     
-}
+    dataArray.sort((a, b) => {
+        return mediaOrder.indexOf(a.query) - mediaOrder.indexOf(b.query);
+    });
+    
+    dataArray.forEach(({query, results}) => {
+        homePageContainerCreator(query, results);
+    });
+    
+ 
+    
+    // Object.entries(media).map(async ([query, urlQuery]) => {
+    //     const {data} = await api(urlQuery);
+    //     const results = await data.results;
 
-async function getMediaResults(url){
-    const {data} = await api(url);
-    const results = await data.results;
-
-    return results;
+        
+    //     homePageContainerCreator(query, results);
+    // })
 }
 
 
@@ -125,7 +128,7 @@ function homePageButtonsMediaOption(){
 }
 
 
-export function homePageContainerCreator(query, data){  
+export function homePageContainerCreator(query, data){ 
     const section = document.createElement('section');
 
     const title = document.createElement('h1');
