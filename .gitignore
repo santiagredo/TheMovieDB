@@ -105,4 +105,4 @@ dist
 
 
 # secrets.js (API_KEY)
-src/secrets.mjs
+# src/secrets.mjs
