@@ -108,6 +108,10 @@ function showMediaDetails(data){
     const mediaPosterImage = document.createElement('img');
     mediaPosterImage.src = `${imagesPosterURL}${data.poster_path}`;
 
+    mediaPosterImage.addEventListener('error', () => {
+        mediaPosterImage.src = '../media/movieIcon.png';
+        mediaPosterImage.style.opacity = .1;
+    })
 
     mediaDetailsDiv.appendChild(mediaMetaData);
     mediaDetailsDiv.appendChild(title);

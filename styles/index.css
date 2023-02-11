@@ -297,8 +297,6 @@ img{
     width: 12rem;
     height: 200px;
     display: flex;
-    color: white;
-    font-size: 150%;
 }
 
 img:hover{
@@ -311,7 +309,6 @@ img:hover{
     flex-direction: row;
     flex-wrap: wrap;
 }
-
 
 
 
@@ -524,5 +521,9 @@ img:hover{
         position: relative;
         left: 25rem;
         font-size: 2rem;
+    }
+
+    .mediaDetailsContainer h2{
+        font-size: 1rem;
     }
 }

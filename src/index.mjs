@@ -67,16 +67,6 @@ async function getMedia(media){
     dataArray.forEach(({query, results}) => {
         homePageContainerCreator(query, results);
     });
-    
- 
-    
-    // Object.entries(media).map(async ([query, urlQuery]) => {
-    //     const {data} = await api(urlQuery);
-    //     const results = await data.results;
-
-        
-    //     homePageContainerCreator(query, results);
-    // })
 }
 
 
@@ -160,6 +150,11 @@ export function imageContainerCreator(ele, parent){
         queryMediaObject.currentMediaType = ele.media_type ? `#${ele.media_type}` : queryMediaObject.currentMediaType;
         console.log(queryMediaObject.currentMediaType);
         hashLocation(ele.id);
+    });
+
+    movieImage.addEventListener('error', () => {
+        movieImage.src = '../media/movieIcon.png';
+        movieImage.style.opacity = .1;
     })
 
     movieContainer.appendChild(movieImage);
